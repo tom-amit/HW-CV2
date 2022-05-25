@@ -107,14 +107,12 @@ if __name__ == "__main__":
     color = ["#" + ''.join([random.choice('0123456789ABCDEF') for j in range(6)])
              for i in range(pts1.shape[0])]
 
-    # drawPoints([im1, im2], [pts1, pts2])
+    drawPoints([im1, im2], [pts1, pts2])
     c = triangulate([proj1, proj2], [pts1, pts2])
-    #c[:, :2] = np.flip(c[:, :2], axis=1)
     visualize_cloud_xy(c, title="Triangulation")
-    #c[:, :2] = np.flip(c[:, :2], axis=1)
 
     funcs = [Rx, Ry, Rz]
-    R_random = np.linalg.multi_dot([R(random.random() * 0) for R in funcs])
+    R_random = np.linalg.multi_dot([R(random.random() * 360) for R in funcs])
     c = np.dot(R_random, c.T).T
 
     visualize_cloud_xy(c, title="Random Rotation")
